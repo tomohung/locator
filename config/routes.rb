@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     scope '/v1' do
       scope '/locator' do
         post '/' => 'users#create'
-
+        resources :sign_in_records, only: [:show, :create, :update, :destroy]
       end
     end
   end
