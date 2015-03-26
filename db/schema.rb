@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326021021) do
+ActiveRecord::Schema.define(version: 20150326084455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "sign_in_records", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "longitude"
+    t.string   "latitude"
+    t.string   "location_name"
+    t.text     "comment"
+    t.string   "photo_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "device_token"
