@@ -7,7 +7,7 @@ class SignInRecordsController < ApplicationController
       @user = User.create(device_token: params[:device_token])
       record = @user.sign_in_records.new(sign_in_record_param)
       if record.save
-        render nothing: true
+        render json: record
         return
       end
     end
@@ -16,7 +16,8 @@ class SignInRecordsController < ApplicationController
 
   def show
     if @user
-      render nothing: true
+      record = SignInRecord.find(params[:id])
+      render json: record
     else
       render nothing: true, status: :bad_status
     end
@@ -27,7 +28,7 @@ class SignInRecordsController < ApplicationController
       record = SignInRecord.find(params[:id])
       if record.user_id == @user.id
         if record.update(sign_in_record_param)
-          render nothing: true
+          render json: record
           return
         end
       end
@@ -40,7 +41,7 @@ class SignInRecordsController < ApplicationController
       record = SignInRecord.find(params[:id])
       if record.user_id == @user.id
         if record.delete
-          render nothing: true
+          render nothing: true, status: 200
           return
         end
       end
