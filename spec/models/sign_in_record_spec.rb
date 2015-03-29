@@ -37,6 +37,15 @@ describe SignInRecord do
       expect(SignInRecord.first.search_nearest_records.count).to eq(10)
     end
 
+    it 'should return all records if records count < 10 param is nil' do
+      user = User.create(device_token: 'token')
+      (0..5).each do |index|
+        record = user.sign_in_records.create(latitude: index.to_s, longitude: '0')
+      end
+      expect(SignInRecord.count).to eq(6)
+      expect(SignInRecord.first.search_nearest_records.count).to eq(6)
+    end
+
     it 'should return records if param is 500M' do
       user = User.create(device_token: 'token')
       (0..14).each do |index|
