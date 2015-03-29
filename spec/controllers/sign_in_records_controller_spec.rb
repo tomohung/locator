@@ -21,7 +21,7 @@ describe SignInRecordsController do
       user = User.create(device_token: token)
       record = user.sign_in_records.create(latitude: '0', longitude: '0')
       get :show, device_token: token, id: record.id
-      expect(response.status).to eq(200)
+      expect(response).to be_success
       expect(SignInRecord.count).to eq(1)
     end
 
@@ -29,7 +29,7 @@ describe SignInRecordsController do
       user = User.create(device_token: 'qqq')
       record = user.sign_in_records.create(latitude: '0', longitude: '0')
       get :show, device_token: token, id: record.id
-      expect(response.status).to eq(500)
+      expect(response).to be_error
     end
   end
 
