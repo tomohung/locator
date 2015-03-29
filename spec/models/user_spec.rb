@@ -21,4 +21,15 @@ describe User do
     end
   end
 
+  describe '#find_by_token' do
+    let(:token) { 'aaa' }
+
+    it 'should return user if device_token is existed' do
+      User.create(device_token: token)
+      user = User.find_by_token(token)
+      expect(User.count).to eq(1)
+      expect(user).to eq(User.first)
+    end
+  end
+
 end
