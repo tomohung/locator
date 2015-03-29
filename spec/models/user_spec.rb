@@ -4,6 +4,7 @@ describe User do
 
   it { should validate_uniqueness_of :device_token }
   it { should have_many :sign_in_records }
+  it { should have_many :tracked_users }
 
   context 'device_token is existed' do
     it 'should create a new user by device_token' do
